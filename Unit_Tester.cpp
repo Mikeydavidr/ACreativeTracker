@@ -15,13 +15,13 @@ using namespace ACreativeTracker;
 
 // Testing Structs //
 // Testing GetHashID by string
-const char* HASHTESTSTRINGS[] = { "Mirror Shield", "Boomerang", "bOoMeRaNg", "Garbage"};
-const HashID HASHSTRINGEXPECTED[] = { HASH_Mirror_Shield, HASH_Boomerang, HASH_NA, HASH_NA};
+const char* HASHTESTSTRINGS[] = { "Mirror Shield", "Boomerang", "bOoMeRaNg", "Garbage" };
+const HashID HASHSTRINGEXPECTED[] = { HASH_Mirror_Shield, HASH_Boomerang, HASH_NA, HASH_NA };
 const int HASHSTRINGSLENGTH = sizeof(HASHSTRINGEXPECTED) / sizeof(HASHSTRINGEXPECTED[0]);
 
 // Testing GetHashString by HashID
-const HashID HASHTESTIDS[] = {(HashID)14, HASH_Deku_Nut, (HashID)100};
-const char* HASHIDEXPECTED[] = {"Mask of Truth", "Deku Nut", ""};
+const HashID HASHTESTIDS[] = { (HashID)14, HASH_Deku_Nut, (HashID)100 };
+const char* HASHIDEXPECTED[] = { "Mask of Truth", "Deku Nut", "" };
 const int HASHIDLENGTH = sizeof(HASHTESTIDS) / sizeof(HASHTESTIDS[0]);
 
 // Testing GetGossipStoneID by string
@@ -31,8 +31,28 @@ const int GSTONESTRINGLENGTH = sizeof(GSTONEIDEXPECTED) / sizeof(GSTONEIDEXPECTE
 
 // Testing GetGossipStoneName by GSID
 const GossipStoneID GSTONETESTIDS[] = { (GossipStoneID)14, GStone_HF_Cow_Grotto, (GossipStoneID)100, (GossipStoneID)20 };
-const char* GSTONESTRINGEXPECTED[] = { "HF (Cow Grotto)", "HF (Cow Grotto)", "", "KF (Outside Storms)"};
+const char* GSTONESTRINGEXPECTED[] = { "HF (Cow Grotto)", "HF (Cow Grotto)", "", "KF (Outside Storms)" };
 const int GSTONEIDLENGTH = sizeof(GSTONETESTIDS) / sizeof(GSTONETESTIDS[0]);
+
+// Testing GetItemAmount by string
+const char* AMOUNTTESTSTRINGS[] = { "Bombs (5)", "Rupees (200)", "Gold Skulltula Token", "Small Key (Water Temple)" };
+const char* DUNGEONEXPECTED[] = { "None", "None", "None", "Water Temple" };
+const char* ITEMNAMEEXPECTED[] = { "Bombs", "Rupees", "Gold Skulltula Token", "Small Key" };
+const int AMOUNTEXPECTED[] = { 5, 200, 0, 0 };
+const int AMOUNTSTRINGLENGTH = sizeof(AMOUNTEXPECTED) / sizeof(AMOUNTEXPECTED[0]);
+
+// Testing GetItemString by ItemsID
+const ItemsID ITEMTESTIDS[] = { DC, Forest_Medallion, Small_Key, Gold_Skulls, Poachers_Saw, Spooky_Mask, Minute, Epona_Song, Bottle_With_Blue_Fire, Ice_Arrow, Kokiri_Tunic, Bomb_Bag, Bombchu, NA, (ItemsID)3000 };
+const char* ITEMSTRINGEXPECTED[] = {"Goron Ruby", "Forest Medallion", "Small Key", "Gold Skulltula Token", "Poachers Saw", "Spooky Mask", "Minuet of Forest", "Eponas Song", "Blue Fire", "Ice Arrows", "Kokiri Tunic", "Bomb Bag", "Bombchu", "", ""};
+const ItemsID ITEMTYPEEXPECTED[] = { Dungeon_Rewards, Dungeon_Rewards, Collectables, Collectables, Adult_Trade, Child_Trade, Warp_Songs, Songs, Bottles, Equipment, Equipment, Progressives, Consumables, NA, NA };
+const int ITEMIDLENGTH = sizeof(ITEMSTRINGEXPECTED) / sizeof(ITEMSTRINGEXPECTED[0]);
+
+// Testing GetItemID by string
+const char* ITEMTESTSTRINGS[] = {"Slingshot", "Progressive Scale", "Progressive Wallet", "Stone of Agony", "Iron Boots", "Garbo", "Bombs", "Zeldas Lullaby"};
+const ItemsID ITEMIDEXPECTED[] = { Slingshot, Scale, Wallet, SoA, Irons, NA, Bombs};
+const ItemsID STRINGITEMTYPEEXECPTED[] = { Progressives, Progressives, Progressives, Equipment, Equipment, NA, Consumables, Songs };
+const int ITEMSTRINGLENGTH = sizeof(ITEMIDEXPECTED) / sizeof(ITEMIDEXPECTED[0]);
+
 
 // Main functon
 bool Test_All()
@@ -115,47 +135,85 @@ bool Test_Translators()
 			status = false;
 		}
 	}
-	
-	/*
-	// Attempt to get fire arrow long name
-	if (GetItemLongName(99) != "Fire Arrow")
-		return false;
 
-	// Atempt to get bomb bag long name
-	if (GetItemLongName(99) != "Bomb Bag")
-		return false;
+	// Test GetItemAmount from string
+	for (iter = 0; iter < AMOUNTSTRINGLENGTH; iter++)
+	{
+		string Dungeon_Reward = "";
+		int amount_container = 0;
+		string clean_item_name;
+		if (!GetItemInfo(AMOUNTTESTSTRINGS[iter], Dungeon_Reward, amount_container, clean_item_name))
+		{
+			cout << "The function returned false with the following input " << AMOUNTTESTSTRINGS[iter] << endl;
+			status = false;
+		}
 
-	// Atempt to get progressive hookshot long name
-	if (GetItemLongName(99) != "Hookshot")
-		return false;
+		if (amount_container != AMOUNTEXPECTED[iter])
+		{
+			cout << AMOUNTTESTSTRINGS[iter] << " didn't give us the expected amount of " << AMOUNTEXPECTED[iter] << " but gave us " << amount_container << " instead" << endl;
+			status = false;
+		}
 
-	*/
+		if (Dungeon_Reward != DUNGEONEXPECTED[iter])
+		{
+			cout << AMOUNTTESTSTRINGS[iter] << " didn't give us the expected value of " << DUNGEONEXPECTED[iter] << " it got " << Dungeon_Reward << endl;
+			status = false;
+		}
+
+		if (clean_item_name != ITEMNAMEEXPECTED[iter])
+		{
+			cout << "We expected the clean item name of " << ITEMNAMEEXPECTED[iter] << " but we got " << clean_item_name << " instead " << endl;
+			status = false;
+		}
+	}
+
+	// Test getting item string by item ID
+	for (iter = 0; iter < ITEMIDLENGTH; iter++)
+	{
+		if (GetItemString(ITEMTESTIDS[iter]) != ITEMSTRINGEXPECTED[iter])
+		{
+			cout << ITEMTESTIDS[iter] << " did not give the expected string of " << ITEMSTRINGEXPECTED[iter] << " instead it gave " << GetItemString(ITEMTESTIDS[iter]) << endl;
+			status = false;
+		}
+
+		if (GetItemType(ITEMTESTIDS[iter]) != ITEMTYPEEXPECTED[iter])
+		{
+			cout << GetItemString(ITEMTESTIDS[iter]) << " did not give the expected item type " << ITEMTYPEEXPECTED[iter] << " instead it gave " << GetItemType(ITEMTESTIDS[iter]) << endl;
+			status = false;
+		}
+	}
+
+	// Test getting item IDs by string
+	for (iter = 0; iter < ITEMSTRINGLENGTH; iter++)
+	{
+		string Dungeon_Reward = "";
+		int amount_container = 0;
+		string clean_item_name;
+		if (!GetItemInfo(ITEMTESTSTRINGS[iter], Dungeon_Reward, amount_container, clean_item_name))
+		{
+			cout << "The function returned false with the following input " << ITEMTESTSTRINGS[iter] << endl;
+			status = false;
+		}
+
+		if (GetItemID(clean_item_name) != ITEMIDEXPECTED[iter])
+		{
+			cout << ITEMTESTSTRINGS[iter] << " clean item string was " << clean_item_name << endl;
+			cout << ITEMTESTSTRINGS[iter] << " didn't give us the expected ID value of " << ITEMIDEXPECTED[iter] << " but gave us " << GetItemID(clean_item_name) << " instead " << endl;
+			status = false;
+		}
+
+		if (GetItemType(clean_item_name) != STRINGITEMTYPEEXECPTED[iter])
+		{
+			cout << ITEMTESTSTRINGS[iter] << " clean item string was " << clean_item_name << endl;
+			cout << ITEMTESTSTRINGS[iter] << " expected the item type of " << STRINGITEMTYPEEXECPTED[iter] << " instead we got " << GetItemType(clean_item_name) << endl;
+			status = false;
+		}
+	}
+
 	return status;
 }
 
 bool Test_Hints_Classes()
 {
 	return true;
-}
-
-// Helper Functions
-// function to convert decimal to binary
-void decToBinary(int n)
-{
-	// array to store binary number
-	int binaryNum[32];
-
-	// counter for binary array
-	int i = 0;
-	while (n > 0) {
-
-		// storing remainder in binary array
-		binaryNum[i] = n % 2;
-		n = n / 2;
-		i++;
-	}
-
-	// printing binary array in reverse order
-	for (int j = i - 1; j >= 0; j--)
-		cout << binaryNum[j];
 }

@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 /*********************************************************************************
 This tracker is built with the intention of being modular in design. As additional
 functionality is required, space will have been made to facilitate the connection.
