@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include "Defines.h"
+#include "Translators.h"
 
 using std::string;
 
@@ -14,13 +15,25 @@ namespace ACreativeTracker
 	{
 	public:
 
+		//DESC: 
 		Hint();
+
+		//DESC: 
 		~Hint();
-		bool AddHint(string CheckLongName, string);
+
+		//DESC: 
+		bool AddHint(string CheckLongName, string HintedItem, string GossipStoneLoc);
+
+		//DESC: 
+		bool GetHint(string &CheckLongName, string &HintedItem);
+
+		// How do we get multiple hint locations?
+		//DESC: 
+		void ListAllLocations();
 
 	private:
-		string CheckLongName;
-		char ItemID;
+		string CheckName;
+		ItemsID ItemID;
 		char TimesHinted;
 		char LocHinted[MAXIMUM_TIMES_HINTABLE];
 	};

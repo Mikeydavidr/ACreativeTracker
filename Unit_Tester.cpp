@@ -14,6 +14,7 @@ Bit 1 - Hints Classes (Hint.cpp and Hints.cpp)
 using namespace ACreativeTracker;
 
 // Testing Structs //
+//===================================Translators Testing=====================================//
 // Testing GetHashID by string
 const char* HASHTESTSTRINGS[] = { "Mirror Shield", "Boomerang", "bOoMeRaNg", "Garbage" };
 const HashID HASHSTRINGEXPECTED[] = { HASH_Mirror_Shield, HASH_Boomerang, HASH_NA, HASH_NA };
@@ -53,6 +54,13 @@ const ItemsID ITEMIDEXPECTED[] = { Slingshot, Scale, Wallet, SoA, Irons, NA, Bom
 const ItemsID STRINGITEMTYPEEXECPTED[] = { Progressives, Progressives, Progressives, Equipment, Equipment, NA, Consumables, Songs };
 const int ITEMSTRINGLENGTH = sizeof(ITEMIDEXPECTED) / sizeof(ITEMIDEXPECTED[0]);
 
+//===================================Hints Testing=====================================//
+// Testing creating hints and trying to modify them
+const Hint HINTARRAY[] = { Hint(), Hint(), Hint(), Hint(), Hint() };
+const char* HINTLOCATIONS[] = { "LW (Near Shortcuts Grotto)", "KF (Deku Tree Left)", "DMT(Storms Grotto)", "Colossus(Spirit Temple)","ZR (Near Grottos)" };
+const char* HINTCHECK[] = { "Water Boss Key", "30 Skulls", "Water Gate Boss Key", "Frogs 2", "Minute Check" };
+const char* HINTITEM[] = { "Piece of Heart", "Arrows", "Biggoron Sword", "Megaton Hammer", "Progressive Strength" };
+const int HINTSLENGTH = sizeof(HINTARRAY) / sizeof(HINTARRAY[0]);
 
 // Main functon
 bool Test_All()
@@ -215,5 +223,23 @@ bool Test_Translators()
 
 bool Test_Hints_Classes()
 {
-	return true;
+	bool status = true;
+	int iter;
+
+	Hint ActiveHint;
+	string CheckName;
+	string ItemName;
+
+	for (iter = 0; iter < HINTSLENGTH; iter++)
+	{
+		ActiveHint = HINTARRAY[iter];
+		ActiveHint.GetHint(CheckName, ItemName);
+		cout << "We currently have " << CheckName << " check name and " << ItemName << " item name." << endl;
+		ActiveHint.AddHint(HINTCHECK[iter], HINTITEM[iter], HINTLOCATIONS[iter]);
+		cout << "Then we got " << CheckName << " check name and " << ItemName << " item name." << endl << endl;
+		ActiveHint.ListAllLocations();
+	}
+
+
+	return status;
 }
