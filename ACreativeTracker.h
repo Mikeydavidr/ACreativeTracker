@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿#ifndef __ACreativeTracker__  
+#define __ACreativeTracker__ 
+
 /*********************************************************************************
 This tracker is built with the intention of being modular in design. As additional
 functionality is required, space will have been made to facilitate the connection.
@@ -22,3 +24,4 @@ namespace ACreativeTracker
 	using std::cout;
 	using std::endl;
 }
+#endif __ACreativeTracker__

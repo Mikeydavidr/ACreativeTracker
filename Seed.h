@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __Seed__  
+#define __Seed__ 
 
 #include <iostream>
 #include <string.h>
@@ -22,3 +23,4 @@ namespace ACreativeTracker
 		
 	};
 }
+#endif __Seed__

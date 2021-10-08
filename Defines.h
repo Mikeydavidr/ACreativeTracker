@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __Defines__  
+#define __Defines__ 
 
 #include <string.h>
 
@@ -243,3 +244,4 @@ namespace ACreativeTracker
 
 
 }
+#endif __Defines__

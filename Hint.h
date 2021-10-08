@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __Hint__  
+#define __Hint__ 
 
 #include <iostream>
 #include <string.h>
@@ -38,3 +39,5 @@ namespace ACreativeTracker
 		char LocHinted[MAXIMUM_TIMES_HINTABLE];
 	};
 }
+
+#endif __Hint__

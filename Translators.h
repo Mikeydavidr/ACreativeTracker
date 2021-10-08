@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __Translators__  
+#define __Translators__ 
 
 #include <iostream>
 #include <string.h>
@@ -56,3 +57,4 @@ namespace ACreativeTracker
 	//DESC:
 	bool ConfigureMapping();
 }
+#endif __Translators__

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __Unit_Tester__  
+#define __Unit_Tester__ 
 
 #include <iostream>
 #include <string.h>
@@ -17,3 +18,4 @@ bool Test_All();
 // Intermediators
 bool Test_Translators();
 bool Test_Hints_Classes();
+#endif __Unit_Tester__
