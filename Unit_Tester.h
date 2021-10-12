@@ -6,7 +6,7 @@
 #include <bitset>
 
 #include "Translators.h"
-#include "Hint.cpp"
+#include "Hint.h"
 
 using std::string;
 using std::cout;
