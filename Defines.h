@@ -1,7 +1,7 @@
 #ifndef __Defines__  
 #define __Defines__ 
 
-#include <string.h>
+#include <string>
 
 namespace ACreativeTracker
 {
@@ -9,6 +9,9 @@ namespace ACreativeTracker
 	const char MAXIMUM_TIMES_HINTABLE = 10;
 	const char MAXIMUM_HINTS_EXPECTED = 32;
 	const char PROGRESSIVE_STRING_RACE = 11;
+	const char MAXIMUM_HINT_PER_CATEGORY = 10;
+	const char ACTUAL_HINT_START = 13;
+	const std::string HINT_TABLE_FILE = "HintList.py";
 
 	// Necessary Enums
 	enum ItemsID
@@ -141,6 +144,14 @@ namespace ACreativeTracker
 		Shadow, Shadow_Medallion = Shadow,
 		Spirit, Spirit_Medallion = Spirit,
 		Light, Light_Medallion = Light,
+
+		Extra_Dungeons,
+
+		Hint_Types,
+		Always_Hint,
+		Barren_Hint,
+		Sometimes_Hint,
+		WotH_Hint,
 		LAST
 	};
 
@@ -236,9 +247,9 @@ namespace ACreativeTracker
 		Water_Temple,
 		Shadow_Temple,
 		Spirit_Temple,
-		Bottom_Of_the_Well, BotW = Bottom_Of_the_Well,
-		Gerudo_Training_Grounds, GTG = Gerudo_Training_Grounds,
-		Ice_Caverns,
+		Bottom_Of_the_Well,
+		Gerudo_Training_Grounds,
+		Ice_Cavern,
 		Ganons_Castle
 	};
 

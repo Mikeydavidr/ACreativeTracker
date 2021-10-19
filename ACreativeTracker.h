@@ -10,7 +10,7 @@ simulator which uses the tracker interface to operate
 
 // Libraries universal to all files.
 #include <iostream>
-#include <string.h>
+#include <string>
 
 // Project Headers
 #include "Seed.h"

@@ -7,6 +7,6 @@ set(CMAKE_C_STANDARD 11)
 project ("ACreativeTracker")
 
 # Add source to this project's executable.
-add_executable (ACreativeTracker "ACreativeTracker.cpp" "ACreativeTracker.h" "Seed.h" "Seed.cpp" "Hint.cpp" "Hint.h" "Translators.h" "Translators.cpp" "Unit_Tester.h" "Unit_Tester.cpp" "Defines.h")
+add_executable (ACreativeTracker "ACreativeTracker.cpp" "ACreativeTracker.h" "Seed.h" "Seed.cpp" "Hint.cpp" "Hint.h" "Translators.h" "Translators.cpp" "Unit_Tester.h" "Unit_Tester.cpp" "Defines.h" "Hints.cpp" "Hints.h")
 
 # TODO: Add tests and install targets if needed.

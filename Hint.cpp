@@ -10,7 +10,7 @@ namespace ACreativeTracker
 		CheckName = "";
 		ItemID = NA;
 		TimesHinted = 0;
-		LocHinted[0] = 0;
+		LocHinted[0] = GStone_NA;
 	}
 
 	//DESC: 
@@ -24,8 +24,13 @@ namespace ACreativeTracker
 	//DESC: 
 	//INPUT: None.
 	//OUTPUT: None.
-	bool Hint::AddHint(string CheckLongName, string HintedItem, string GossipStoneLoc)
+	bool Hint::AddHintEntry(string CheckLongName, string HintedItem, string GossipStoneLoc)
 	{
+		/*
+		cout << "The hint I am trying to add looks like " << endl;
+		cout << "Check name : " << CheckLongName << endl;
+		cout << "Hnted Item : " << HintedItem << endl;
+		cout << "Gossip Stone : " << GossipStoneLoc << endl;*/
 		if (TimesHinted == 0)
 		{
 			CheckName = CheckLongName;
@@ -49,9 +54,10 @@ namespace ACreativeTracker
 	//DESC: 
 	//INPUT: None.
 	//OUTPUT: None.
-	bool Hint::GetHint(string& CheckLongName, string& HintedItem)
+	bool Hint::GetHintEntry(string& CheckLongName, string& HintedItem)
 	{
 		CheckLongName = CheckName;
+		//cout << "ItemID value is " << ItemID << " string value is " << GetItemString(ItemID) << endl;
 		HintedItem = GetItemString(ItemID);
 		return true;
 	}
@@ -61,11 +67,11 @@ namespace ACreativeTracker
 	//OUTPUT: None.
 	void Hint::ListAllLocations()
 	{
-		cout << "Item " << GetItemString(ItemID) << " has been hinted at " << CheckName << " " << TimesHinted << " times" << endl;
+		//cout << "Item " << GetItemString(ItemsID(int(ItemID))) << " has been hinted at " << CheckName << " " << int(TimesHinted) << " times" << endl;
 		cout << "It has been hinted at the following locations" << endl;
 		for (int iter = 0; iter < TimesHinted; iter++)
 		{
-			cout << "\t" << LocHinted[iter] << endl;
+			cout << "\t" << LocHinted[iter] << "\t" << GetGossipStoneName(LocHinted[iter]) << endl;
 		}
 	}
 }

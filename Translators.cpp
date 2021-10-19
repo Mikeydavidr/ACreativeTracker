@@ -99,42 +99,41 @@ namespace ACreativeTracker
 	//OUTPUT:
 	ItemsID GetItemType(ItemsID ItemID)
 	{
-		if (ItemID == Consumables || ItemID == Progressives ||
-			ItemID == Equipment || ItemID == Bottles || 
-			ItemID == Songs || ItemID == Warp_Songs ||
-			ItemID == Child_Trade || ItemID == Adult_Trade || 
-			ItemID == Collectables || ItemID == Dungeon_Rewards)
-			return ItemID;
-
-		else if (ItemID > Consumables && ItemID < Progressives)
+		 if (ItemID >= Consumables && ItemID < Progressives)
 			return Consumables;
 
-		else if (ItemID > Progressives && ItemID < Equipment)
+		else if (ItemID >= Progressives && ItemID < Equipment)
 			return Progressives;
 
-		else if (ItemID > Equipment && ItemID < Bottles)
+		else if (ItemID >= Equipment && ItemID < Bottles)
 			return Equipment;
 
-		else if (ItemID > Bottles && ItemID < Songs)
+		else if (ItemID >= Bottles && ItemID < Songs)
 			return Bottles;
 
-		else if (ItemID > Songs && ItemID < Warp_Songs)
+		else if (ItemID >= Songs && ItemID < Warp_Songs)
 			return Songs;
 
-		else if (ItemID > Warp_Songs && ItemID < Child_Trade)
+		else if (ItemID >= Warp_Songs && ItemID < Child_Trade)
 			return Warp_Songs;
 
-		else if (ItemID > Child_Trade && ItemID < Adult_Trade)
+		else if (ItemID >= Child_Trade && ItemID < Adult_Trade)
 			return Child_Trade;
 
-		else if (ItemID > Adult_Trade && ItemID < Collectables)
+		else if (ItemID >= Adult_Trade && ItemID < Collectables)
 			return Adult_Trade;
 
-		else if (ItemID > Collectables && ItemID < Dungeon_Rewards)
+		else if (ItemID >= Collectables && ItemID < Dungeon_Rewards)
 			return Collectables;
 
-		else if (ItemID > Dungeon_Rewards && ItemID < LAST)
+		else if (ItemID >= Dungeon_Rewards && ItemID < Extra_Dungeons)
 			return Dungeon_Rewards;
+
+		else if (ItemID >= Extra_Dungeons && ItemID < Hint_Types)
+			return Extra_Dungeons;
+
+		else if (ItemID >= Hint_Types && ItemID < LAST)
+			return Hint_Types;
 
 		else
 			return NA;
@@ -208,6 +207,30 @@ namespace ACreativeTracker
 			return it->second;
 		else
 			return (HashID)0;
+	}
+
+	//DESC:
+	//INPUT: 
+	//OUTPUT:
+	bool CreateHintTable()
+	{
+		string line;
+		std::ifstream HTFile(HINT_TABLE_FILE);
+		if(HTFile.is_open())
+		{
+			while(std::getline(HTFile, line))
+			{
+				cout << line << '\n';
+			}
+			HTFile.close();
+		}
+
+		else
+		{
+			cout << "Error opening the file " << HINT_TABLE_FILE << endl;
+			return false;
+		}
+		return true;
 	}
 
 	//DESC:
@@ -417,7 +440,7 @@ namespace ACreativeTracker
 			DungeonMap.insert(std::make_pair((std::string)"Spirit Temple", (DungeonID)Spirit_Temple));
 			DungeonMap.insert(std::make_pair((std::string)"Bottom Of the Well", (DungeonID)Bottom_Of_the_Well));
 			DungeonMap.insert(std::make_pair((std::string)"Gerudo Training Grounds", (DungeonID)Gerudo_Training_Grounds));
-			DungeonMap.insert(std::make_pair((std::string)"Ice Caverns", (DungeonID)Ice_Caverns));
+			DungeonMap.insert(std::make_pair((std::string)"Ice Cavern", (DungeonID)Ice_Cavern));
 			DungeonMap.insert(std::make_pair((std::string)"Ganons Castle", (DungeonID)Ganons_Castle));
 
 			Mapped = true;

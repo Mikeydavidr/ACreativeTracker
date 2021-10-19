@@ -2,7 +2,7 @@
 #define __Unit_Tester__ 
 
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <bitset>
 
 #include "Translators.h"

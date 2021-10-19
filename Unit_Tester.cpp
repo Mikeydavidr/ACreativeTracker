@@ -57,9 +57,9 @@ const int ITEMSTRINGLENGTH = sizeof(ITEMIDEXPECTED) / sizeof(ITEMIDEXPECTED[0]);
 //===================================Hints Testing=====================================//
 // Testing creating hints and trying to modify them
 const Hint HINTARRAY[] = { Hint(), Hint(), Hint(), Hint(), Hint() };
-const char* HINTLOCATIONS[] = { "LW (Near Shortcuts Grotto)", "KF (Deku Tree Left)", "DMT(Storms Grotto)", "Colossus(Spirit Temple)","ZR (Near Grottos)" };
+const char* HINTLOCATIONS[] = { "LW (Near Shortcuts Grotto)", "KF (Deku Tree Left)", "DMT (Storms Grotto)", "Colossus (Spirit Temple)","ZR (Near Grottos)" };
 const char* HINTCHECK[] = { "Water Boss Key", "30 Skulls", "Water Gate Boss Key", "Frogs 2", "Minute Check" };
-const char* HINTITEM[] = { "Piece of Heart", "Arrows", "Biggoron Sword", "Megaton Hammer", "Progressive Strength" };
+const char* HINTITEM[] = { "Piece Of Heart", "Arrows", "Biggoron Sword", "Megaton Hammer", "Progressive Strength" };
 const int HINTSLENGTH = sizeof(HINTARRAY) / sizeof(HINTARRAY[0]);
 
 // Main functon
@@ -233,11 +233,42 @@ bool Test_Hints_Classes()
 	for (iter = 0; iter < HINTSLENGTH; iter++)
 	{
 		ActiveHint = HINTARRAY[iter];
-		ActiveHint.GetHint(CheckName, ItemName);
-		cout << "We currently have " << CheckName << " check name and " << ItemName << " item name." << endl;
-		ActiveHint.AddHint(HINTCHECK[iter], HINTITEM[iter], HINTLOCATIONS[iter]);
-		cout << "Then we got " << CheckName << " check name and " << ItemName << " item name." << endl << endl;
-		ActiveHint.ListAllLocations();
+		//ActiveHint.GetHint(CheckName, ItemName);
+		//cout << "We currently have " << CheckName << " check name and " << ItemName << " item name." << endl;
+		string Dungeon_Reward;
+		int Amount_Container;
+		string Clean_String;
+		if (!GetItemInfo(HINTITEM[iter], Dungeon_Reward, Amount_Container, Clean_String))
+		{
+			status = false;
+		}
+		ActiveHint.AddHintEntry(HINTCHECK[iter], Clean_String, HINTLOCATIONS[iter]);
+		/*if (iter > 1 && iter < 5)
+		{
+			ActiveHint.AddHint(HINTCHECK[iter], HINTITEM[iter], HINTLOCATIONS[iter+1]);
+			ActiveHint.AddHint(HINTCHECK[iter-1], HINTITEM[iter], HINTLOCATIONS[iter+1]);
+		}*/
+		ActiveHint.GetHintEntry(CheckName, ItemName);
+		if (CheckName != HINTCHECK[iter])
+		{
+			cout << "Check name failed! |" << CheckName << "| != |" << HINTCHECK[iter] << "|" << endl;
+			status = false;
+		}
+
+		if (ItemName != Clean_String)
+		{
+			cout << "Item name failed! |" << ItemName << "| != |" << Clean_String << "|" << endl;
+			status = false;
+		}
+
+		// Larger Hints class
+		if(!CreateHintTable())
+		{
+			cout << "Hint table was unsuccessful!" << endl;
+		}
+		//cout << "We got " << CheckName << " check name and " << ItemName << " item name." << endl;
+		//ActiveHint.ListAllLocations();
+		//cout << endl;
 	}
 
 

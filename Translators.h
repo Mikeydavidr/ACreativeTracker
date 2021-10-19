@@ -2,7 +2,8 @@
 #define __Translators__ 
 
 #include <iostream>
-#include <string.h>
+#include <fstream>
+#include <string>
 #include <iterator>
 #include <cstdlib>
 #include <map>
@@ -53,6 +54,9 @@ namespace ACreativeTracker
 
 	//DESC: 
 	HashID GetHashID(string HashName);
+
+	//DESC:
+	bool CreateHintTable();
 
 	//DESC:
 	bool ConfigureMapping();

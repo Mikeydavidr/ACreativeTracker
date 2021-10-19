@@ -2,7 +2,7 @@
 #define __Hint__ 
 
 #include <iostream>
-#include <string.h>
+#include <string>
 #include "Defines.h"
 #include "Translators.h"
 
@@ -14,6 +14,12 @@ namespace ACreativeTracker
 	//DESC:
 	class Hint
 	{
+	private:
+		string CheckName;
+		ItemsID ItemID;
+		char TimesHinted;
+		GossipStoneID LocHinted[MAXIMUM_TIMES_HINTABLE];
+
 	public:
 
 		//DESC: 
@@ -23,20 +29,16 @@ namespace ACreativeTracker
 		~Hint();
 
 		//DESC: 
-		bool AddHint(string CheckLongName, string HintedItem, string GossipStoneLoc);
+		bool AddHintEntry(string CheckLongName, string HintedItem, string GossipStoneLoc);
 
 		//DESC: 
-		bool GetHint(string &CheckLongName, string &HintedItem);
+		bool GetHintEntry(string &CheckLongName, string &HintedItem);
 
 		// How do we get multiple hint locations?
 		//DESC: 
 		void ListAllLocations();
 
-	private:
-		string CheckName;
-		ItemsID ItemID;
-		char TimesHinted;
-		char LocHinted[MAXIMUM_TIMES_HINTABLE];
+	
 	};
 }
 
